@@ -1,0 +1,1 @@
+dom.GetObject("Systemvariabel - Temperaturen Heute").ProgramExecute();
