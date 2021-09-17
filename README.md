@@ -11,7 +11,7 @@ Many thanks to the active posters on https://homematic-forum.de otherwise none o
 
 ## Programs for the Button with E-Paper Status Display (HmIP-WRCD) 
 
-* **Wandtaster - Zeile 2:** Displays the content of the sytem variable ```TemperaturenHeute```.
+* **Wandtaster - Zeile 2:** Displays the content of the sytem variables ```WetterTempMin```, ```WetterTempMax```, ```WetterTempDewPoint``` and ```WetterIcon```.
 * **Wandtaster - Zeile 3:** Displays the content of the system variable ```IstTemperatur``` and a ‘Window Open’ icon if the system variable ```FensterOffen``` is true.
 * **Wandtaster - Zeile 3:** Display a ‘Warning‘ icon and beep if the system variable ```AnzahlNiedrigeBatterien``` is non-zero, otherwise display text if the system variable ```BalkontürOffen``` is true.  
 
@@ -22,4 +22,4 @@ Many thanks to the active posters on https://homematic-forum.de otherwise none o
 * **FensterOffen**: Whether any window is open
 * **Gradzeichen**: A work around because the CCU3 frontend can’t save the degree symbol.  (Use this in string concatination)
 * **IstTemperatur**: The average of all thermostats’ current temperature
-* **TemperaturenHeute**: Today’s high/low temperature scraped from a web page
+* **WetterTempMin**, **WetterTempMax**, **WetterTempDewPoint** and **WetterIcon** are populated from the OpenWeatherMap API
