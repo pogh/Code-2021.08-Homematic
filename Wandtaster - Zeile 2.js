@@ -34,7 +34,7 @@ string beep = "";
 string iconVariable = dom.GetObject("WetterIcon").Value();
 
 if((system.Date("%H").ToInteger() >= 3)
-&& (system.Date("%H").ToInteger() <= 17))
+&& (system.Date("%H").ToInteger() < 17))
 {
     text = dom.GetObject("WetterTempMax").Value();
 
