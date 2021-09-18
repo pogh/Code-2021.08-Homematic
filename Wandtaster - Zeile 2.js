@@ -37,6 +37,12 @@ if((system.Date("%H").ToInteger() >= 3)
 && (system.Date("%H").ToInteger() <= 17))
 {
     text = dom.GetObject("WetterTempMax").Value();
+
+    if(dom.GetObject("WetterTempDewPoint").Value() > 16)
+    {
+        text = "Warm! " + text;
+    }
+    
     icon = "10"; ! Sonne
 
     !clear sky
@@ -151,11 +157,6 @@ else
     { 	
         icon = "13";  ! Wolke
     }
-}
-
-if(dom.GetObject("WetterTempDewPoint").Value() > 16)
-{
-    text = "Warm! " + text;
 }
 
 dom.GetObject("HmIP-RF.002A5D8989D5D9:3.COMBINED_PARAMETER").State("{DDBC=WHITE,DDTC=BLACK,DDI=" # icon # ",DDA=CENTER,DDS=" # text # ",DDID=2,DDC=true}" # beep);
