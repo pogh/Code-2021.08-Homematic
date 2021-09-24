@@ -42,7 +42,7 @@ if((system.Date("%H").ToInteger() >= 3)
     {
         text = "Warm! " + text;
     }
-    
+
     icon = "10"; ! Sonne
 
     !clear sky
@@ -60,7 +60,7 @@ if((system.Date("%H").ToInteger() >= 3)
     !scattered clouds
     if(iconVariable == "03d")  
     { 	
-        icon = "13";  ! Wolke
+        icon = "19";  ! Wolke/Sonne
     }
     
     !broken clouds
@@ -72,7 +72,7 @@ if((system.Date("%H").ToInteger() >= 3)
     !shower rain
     if(iconVariable == "09d")  
     { 	
-        icon = "15";  ! leichter Regen
+        icon = "17";  ! Wolke/Regen
     }
     
     !rain
@@ -90,7 +90,7 @@ if((system.Date("%H").ToInteger() >= 3)
     !snow
     if(iconVariable == "13d")  
     { 	
-        icon = "21";  ! Wolke/Schneeflocke
+        icon = "18";  ! Wolke/Schnee
     }
     
     !mist
@@ -113,7 +113,7 @@ else
     !few clouds
     if(iconVariable == "02d")  
     {
-        icon = "16"; ! Wolke/Mond
+        icon = "11"; ! Mond
     }
     
     !scattered clouds
@@ -125,13 +125,13 @@ else
     !broken clouds
     if(iconVariable == "04d")  
     { 	
-        icon = "16"; ! Wolke/Mond
+        icon = "13";  ! Wolke
     }
     
     !shower rain
     if(iconVariable == "09d")  
     { 	
-        icon = "15";  ! leichter Regen
+        icon = "17";  ! Wolke/Regen
     }
     
     !rain
@@ -149,7 +149,7 @@ else
     !snow
     if(iconVariable == "13d")  
     { 	
-        icon = "21";  ! Wolke/Schneeflocke
+        icon = "18";  ! Wolke/Schnee
     }
     
     !mist
