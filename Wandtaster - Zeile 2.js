@@ -31,7 +31,7 @@ string icon = "0";
 string text = "";
 string beep = "";
 
-string iconVariable = dom.GetObject("WetterIcon").Value();
+string iconVariable = dom.GetObject("WetterIcon").Value().Substr(0, 2);
 
 if((system.Date("%H").ToInteger() >= 3)
 && (system.Date("%H").ToInteger() < 17))
@@ -46,55 +46,55 @@ if((system.Date("%H").ToInteger() >= 3)
     icon = "10"; ! Sonne
 
     !clear sky
-    if(iconVariable == "01d")  
+    if(iconVariable == "01")
     { 	
         icon = "10"; ! Sonne
     }
     
-    !few clouds
-    if(iconVariable == "02d")  
+    !few clouds: 11 - 25 %
+    if(iconVariable == "02")  
     {
         icon = "10"; ! Sonne
     }
     
-    !scattered clouds
-    if(iconVariable == "03d")  
+    !scattered clouds: 25 - 50 %
+    if(iconVariable == "03")  
     { 	
         icon = "19";  ! Wolke/Sonne
     }
     
-    !broken clouds
-    if(iconVariable == "04d")  
+    !broken clouds: 51 - 100 %
+    if(iconVariable == "04")  
     { 	
         icon = "13";  ! Wolke
     }
     
     !shower rain
-    if(iconVariable == "09d")  
+    if(iconVariable == "09")  
     { 	
         icon = "17";  ! Wolke/Regen
     }
     
     !rain
-    if(iconVariable == "10d")  
+    if(iconVariable == "10")  
     { 	
         icon = "17";  ! Wolke/Regen
     }
     
     !thunderstorm
-    if(iconVariable == "11d")  
+    if(iconVariable == "11")  
     { 	
         icon = "14";  ! Wolke/Blitz
     }
     
     !snow
-    if(iconVariable == "13d")  
+    if(iconVariable == "13")  
     { 	
         icon = "18";  ! Wolke/Schnee
     }
     
     !mist
-    if(iconVariable == "50d")   
+    if(iconVariable == "50")   
     { 	
         icon = "13";  ! Wolke
     }
@@ -105,55 +105,55 @@ else
     icon = "11"; ! Mond
 
     !clear sky
-    if(iconVariable == "01d")  
+    if(iconVariable == "01")  
     { 	
         icon = "11"; ! Mond
     }
     
-    !few clouds
-    if(iconVariable == "02d")  
+    !few clouds: 11 - 25 %
+    if(iconVariable == "02")  
     {
         icon = "11"; ! Mond
     }
     
-    !scattered clouds
-    if(iconVariable == "03d")  
+    !scattered clouds: 25 - 50 %
+    if(iconVariable == "03")  
     { 	
         icon = "16"; ! Wolke/Mond
     }
     
-    !broken clouds
-    if(iconVariable == "04d")  
+    !broken clouds: 51 - 100 %
+    if(iconVariable == "04")  
     { 	
         icon = "13";  ! Wolke
     }
     
     !shower rain
-    if(iconVariable == "09d")  
+    if(iconVariable == "09")  
     { 	
         icon = "17";  ! Wolke/Regen
     }
     
     !rain
-    if(iconVariable == "10d")  
+    if(iconVariable == "10")  
     { 	
         icon = "17";  ! Wolke/Regen
     }
     
     !thunderstorm
-    if(iconVariable == "11d")  
+    if(iconVariable == "11")  
     { 	
         icon = "14";  ! Wolke/Blitz
     }
     
     !snow
-    if(iconVariable == "13d")  
+    if(iconVariable == "13")  
     { 	
         icon = "18";  ! Wolke/Schnee
     }
     
     !mist
-    if(iconVariable == "50d")   
+    if(iconVariable == "50")   
     { 	
         icon = "13";  ! Wolke
     }
