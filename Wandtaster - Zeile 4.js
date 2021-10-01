@@ -2,6 +2,12 @@ string icon = "";
 string text = "";
 string beep = "";
 
+if(dom.GetObject("NiedrigtempWarnung").Value() == true)
+{
+    icon = "7";
+    beep = ",{R=2,IN=5,ANS=7}";
+}
+
 if(dom.GetObject("AnzahlNiedrigeBatterien").Value() > 0)
 {
     icon = "7";
