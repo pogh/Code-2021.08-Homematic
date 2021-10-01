@@ -47,14 +47,20 @@ if(
     WriteLine("New Temperature: " # newTemperatur);
 }
 
-if(temperatureLow < 16
-&& dom.GetObject("NiedrigtempWarnung").Value() != true)
+if(
+    (temperatureLow < 16)
+    && 
+    (dom.GetObject("NiedrigtempWarnung").Value() != true)
+)
 {
     dom.GetObject("NiedrigtempWarnung").State(true);
 }
 
-if(temperatureLow >= 16
-&& dom.GetObject("NiedrigtempWarnung").Value() != false)
+if(
+    (temperatureLow >= 16)
+    && 
+    (dom.GetObject("NiedrigtempWarnung").Value() != false)
+)
 {
     dom.GetObject("NiedrigtempWarnung").State(false);
 }
