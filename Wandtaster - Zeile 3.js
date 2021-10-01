@@ -13,7 +13,7 @@ if(dom.GetObject("FensterOffen").Value() == true)
 
 if(dom.GetObject("NiedrigtempWarnung").Value() == true)
 {
-    icon = "7";
+    icon = "21";
     beep = ",{R=2,IN=5,ANS=7}";
 }
 
