@@ -48,6 +48,17 @@ if(
 }
 
 if(
+    (temperatureLow == 0)
+    && 
+    (dom.GetObject("NiedrigtempWarnung").Value() != false)
+)
+{
+    dom.GetObject("NiedrigtempWarnung").State(false);
+}
+
+if(
+    (temperatureLow != 0)
+    &&
     (temperatureLow < 16)
     && 
     (dom.GetObject("NiedrigtempWarnung").Value() != true)
@@ -57,6 +68,8 @@ if(
 }
 
 if(
+    (temperatureLow != 0)
+    &&
     (temperatureLow >= 16)
     && 
     (dom.GetObject("NiedrigtempWarnung").Value() != false)
