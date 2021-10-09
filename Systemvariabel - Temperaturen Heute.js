@@ -15,6 +15,7 @@ integer integerValue;
 real min = 99.9;
 real max = 00.0;
 real dewPoint = 0.0;
+integer id = 0;
 integer icon = 0;
 
 string minString;
@@ -75,6 +76,19 @@ while (i < 12) {
 
     ! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - !
 
+    tagName = "id";
+    tagNameLength = tagName.Length();
+
+    stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
+    tagValue = stdout.Substr(0, stdout.Find(",") );
+    tagValue = tagValue.Substr(tagNameLength + 3);
+
+    !WriteLine(i # " id: " # tagValue);
+
+    id = tagValue.Substr(0, 3).ToInteger();
+
+    ! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - !
+
     tagName = "icon";
     tagNameLength = tagName.Length();
 
@@ -86,6 +100,13 @@ while (i < 12) {
     !WriteLine(i # " icon: " # tagValue);
 
     integerValue = tagValue.Substr(0, 2).ToInteger();
+
+    ! Change 'broken clouds: 51%-84%' icon to 'scattered clouds' icon
+    if(id == 803)
+    {
+        icon = 03;
+        iconString = "03x";
+    }
 
     if (integerValue > icon) {
         icon = integerValue;
