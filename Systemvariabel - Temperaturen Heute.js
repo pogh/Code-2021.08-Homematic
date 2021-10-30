@@ -22,6 +22,8 @@ string minString;
 string maxString;
 string dewPointString;
 string iconString;
+integer clearSkyIconCount = 0;
+integer cloudIconCount = 0;
 
 string tagName;
 integer tagNameLength;
@@ -104,14 +106,33 @@ while (i < 12) {
     ! Change 'broken clouds: 51%-84%' icon to 'scattered clouds' icon
     if(id == 803)
     {
-        icon = 03;
+        integerValue = 3;
         iconString = "03x";
     }
 
+    if(integerValue < 4)
+    {
+        clearSkyIconCount = clearSkyIconCount + 1;
+    }
+
+    if(integerValue == 4)
+    {
+        cloudIconCount = cloudIconCount + 1;
+    }
+    
     if (integerValue > icon) {
         icon = integerValue;
         iconString = tagValue;
     }
+}
+
+!----------------------------------------------------------------------------- !
+
+if((iconString.Substr(0, 2).ToInteger() <= 4)
+&& (clearSkyIconCount > 0)
+&& (cloudIconCount > 0))
+{
+    iconString = "03x";
 }
 
 !----------------------------------------------------------------------------- !
