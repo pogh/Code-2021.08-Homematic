@@ -1,15 +1,15 @@
 !----------------------------------------------------------------------------- !
-!WebService
+    !WebService
 
 string stdout;
 string stderr;
-string url = "https://api.openweathermap.org/data/2.5/onecall?lat=52.5220&lon=13.4133&mode=json&units=metric&exclude=alerts,current,daily,minutely&appid=" # dom.GetObject("OpenWeatherMapApiKey").Value();
+string url = "https://api.openweathermap.org/data/2.5/onecall?lat=52.5220&lon=13.4133&mode=json&units=metric&exclude=current,daily,minutely&appid=" # dom.GetObject("OpenWeatherMapApiKey").Value();
 
 system.Exec("wget -q --no-check-certificate -O - '" # url # "' ", & stdout, & stderr);
 
 !----------------------------------------------------------------------------- !
 
-real realValue;
+    real realValue;
 integer integerValue;
 
 real min = 99.9;
@@ -31,7 +31,7 @@ string tagValue;
 
 !----------------------------------------------------------------------------- !
 
-integer i = 0;
+    integer i = 0;
 while (i < 12) {
     i = i + 1;
 
@@ -82,7 +82,7 @@ while (i < 12) {
     tagNameLength = tagName.Length();
 
     stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
-    tagValue = stdout.Substr(0, stdout.Find(",") );
+    tagValue = stdout.Substr(0, stdout.Find(","));
     tagValue = tagValue.Substr(tagNameLength + 3);
 
     !WriteLine(i # " id: " # tagValue);
@@ -103,23 +103,20 @@ while (i < 12) {
 
     integerValue = tagValue.Substr(0, 2).ToInteger();
 
-    ! Change 'broken clouds: 51%-84%' icon to 'scattered clouds' icon
-    if(id == 803)
-    {
+    !Change 'broken clouds: 51%-84%' icon to 'scattered clouds' icon
+    if (id == 803) {
         integerValue = 3;
         iconString = "03x";
     }
 
-    if(integerValue < 4)
-    {
+    if (integerValue < 4) {
         clearSkyIconCount = clearSkyIconCount + 1;
     }
 
-    if(integerValue == 4)
-    {
+    if (integerValue == 4) {
         cloudIconCount = cloudIconCount + 1;
     }
-    
+
     if (integerValue > icon) {
         icon = integerValue;
         iconString = tagValue;
@@ -128,11 +125,31 @@ while (i < 12) {
 
 !----------------------------------------------------------------------------- !
 
-if((iconString.Substr(0, 2).ToInteger() <= 4)
-&& (clearSkyIconCount > 0)
-&& (cloudIconCount > 0))
-{
+if ((iconString.Substr(0, 2).ToInteger() <= 4)
+    && (clearSkyIconCount > 0)
+    && (cloudIconCount > 0)) {
     iconString = "03x";
+}
+
+!----------------------------------------------------------------------------- !
+
+tagName = "alerts";
+
+if (stdout.Find("\"" + tagName + "\":") > -1) {
+    stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
+
+    tagName = "event";
+    tagNameLength = tagName.Length();
+
+    stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
+    tagValue = stdout.Substr(1, stdout.Find(",\"") - 2);
+    tagValue = tagValue.Substr(tagNameLength + 3);
+
+    dom.GetObject("WetterAlert").State(tagValue);
+    WriteLine("Alert: " # tagValue);
+}
+else{
+    dom.GetObject("WetterAlert").State("");
 }
 
 !----------------------------------------------------------------------------- !
@@ -143,7 +160,7 @@ dom.GetObject("WetterTempDewPoint").State(dewPointString);
 dom.GetObject("WetterIcon").State(iconString);
 
 !----------------------------------------------------------------------------- !
-!Debug
+    !Debug
 
 WriteLine("Min: " # dom.GetObject("WetterTempMin").Value());
 WriteLine("Max: " # dom.GetObject("WetterTempMax").Value());
