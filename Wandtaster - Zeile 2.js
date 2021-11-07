@@ -159,4 +159,13 @@ else
     }
 }
 
+text = text.Replace("ä", "{");
+text = text.Replace("ö", "|");
+text = text.Replace("ü", "}");
+text = text.Replace("Ä", "[");
+text = text.Replace("Ö", "#");
+text = text.Replace("Ü", "$");
+text = text.Replace("ß", "_");
+text = text.Replace("°", dom.GetObject("Gradzeichen").Value());
+
 dom.GetObject("HmIP-RF.002A5D8989D5D9:3.COMBINED_PARAMETER").State("{DDBC=WHITE,DDTC=BLACK,DDI=" # icon # ",DDA=CENTER,DDS=" # text # ",DDID=2,DDC=true}" # beep);
