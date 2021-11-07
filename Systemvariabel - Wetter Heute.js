@@ -146,6 +146,8 @@ if ((iconString.Substr(0, 2).ToInteger() <= 4)
         tagValue = stdout.Substr(1, stdout.Find(",\"") - 2);
         tagValue = tagValue.Substr(tagNameLength + 3);
 
+        tagValue = tagValue.ToLatin();
+        
         dom.GetObject("WetterAlert").State(tagValue);
         WriteLine("Alert: " # tagValue);
     }
@@ -155,7 +157,7 @@ if ((iconString.Substr(0, 2).ToInteger() <= 4)
 
     !----------------------------------------------------------------------------- !
 
-        dom.GetObject("WetterTempMin").State(minString + dom.GetObject("Gradzeichen").Value() + "C");
+    dom.GetObject("WetterTempMin").State(minString + dom.GetObject("Gradzeichen").Value() + "C");
     dom.GetObject("WetterTempMax").State(maxString + dom.GetObject("Gradzeichen").Value() + "C");
     dom.GetObject("WetterTempDewPoint").State(dewPointString);
     dom.GetObject("WetterIcon").State(iconString);
