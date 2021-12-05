@@ -9,19 +9,16 @@ system.Exec("wget -q --no-check-certificate -O - '" # url # "' ", & stdout, & st
 
 !----------------------------------------------------------------------------- !
 
-    real realValue;
+real realValue;
 integer integerValue;
 
 real min = 99.9;
 real max = 00.0;
 real dewPoint = 0.0;
-integer id = 0;
-integer icon = 0;
 
-string minString;
-string maxString;
-string dewPointString;
+integer icon = 0;
 string iconString;
+integer id = 0;
 integer clearSkyIconCount = 0;
 integer cloudIconCount = 0;
 
@@ -45,23 +42,19 @@ integer i = 0;
 
         !WriteLine(i # " temp: " # tagValue);
 
-        realValue = tagValue.ToFloat().Round(0);
+        realValue = tagValue.ToFloat();
 
         if (realValue < min) {
             min = realValue;
-            minString = min.ToString();
-            minString = minString.Substr(0, minString.Find("."));
         }
 
         if (realValue > max) {
             max = realValue;
-            maxString = max.ToString();
-            maxString = maxString.Substr(0, maxString.Find("."));
         }
 
         ! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - !
 
-            tagName = "dew_point";
+        tagName = "dew_point";
         tagNameLength = tagName.Length();
 
         stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
@@ -74,12 +67,11 @@ integer i = 0;
 
         if (realValue > dewPoint) {
             dewPoint = realValue;
-            dewPointString = tagValue;
         }
 
         ! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - !
 
-            tagName = "id";
+        tagName = "id";
         tagNameLength = tagName.Length();
 
         stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
@@ -92,7 +84,7 @@ integer i = 0;
 
         ! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - !
 
-            tagName = "icon";
+        tagName = "icon";
         tagNameLength = tagName.Length();
 
         stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
@@ -126,7 +118,7 @@ integer i = 0;
 
     !----------------------------------------------------------------------------- !
 
-if ((iconString.Substr(0, 2).ToInteger() <= 4)
+    if ((iconString.Substr(0, 2).ToInteger() <= 4)
         && (clearSkyIconCount > 0)
         && (cloudIconCount > 0)) {
         iconString = "03x";
@@ -134,7 +126,7 @@ if ((iconString.Substr(0, 2).ToInteger() <= 4)
 
     !----------------------------------------------------------------------------- !
 
-        tagName = "alerts";
+    tagName = "alerts";
 
     if (stdout.Find("\"" + tagName + "\":") > -1) {
         stdout = stdout.Substr(stdout.Find("\"" + tagName + "\":"));
@@ -157,13 +149,13 @@ if ((iconString.Substr(0, 2).ToInteger() <= 4)
 
     !----------------------------------------------------------------------------- !
 
-    dom.GetObject("WetterTempMin").State(minString + dom.GetObject("Gradzeichen").Value() + "C");
-    dom.GetObject("WetterTempMax").State(maxString + dom.GetObject("Gradzeichen").Value() + "C");
-    dom.GetObject("WetterTempDewPoint").State(dewPointString);
+    dom.GetObject("WetterTempMin").State(min);
+    dom.GetObject("WetterTempMax").State(max);
+    dom.GetObject("WetterTempDewPoint").State(dewPoint);
     dom.GetObject("WetterIcon").State(iconString);
 
     !----------------------------------------------------------------------------- !
-        !Debug
+    !Debug
 
     WriteLine("Min: " # dom.GetObject("WetterTempMin").Value());
     WriteLine("Max: " # dom.GetObject("WetterTempMax").Value());

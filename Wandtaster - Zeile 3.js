@@ -1,7 +1,6 @@
-real temperatur = dom.GetObject("IstTemperatur").Value();
-string text = temperatur.ToString();
-text = text.Substr(0, text.Find(".") + 2);
-text = text + dom.GetObject("Gradzeichen").Value() + "C";
+real temp = dom.GetObject("IstTemperatur").Value();
+string text = temp.ToString();
+text = text.Substr(0, text.Find(".") + 2) + dom.GetObject("Gradzeichen").Value() + "C";
 
 string icon = "";
 string beep = "";

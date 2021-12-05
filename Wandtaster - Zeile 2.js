@@ -27,6 +27,7 @@
 
 !-----------------------------------------------------------------------------!
 
+real temp;
 string icon = "0";
 string text = "";
 string beep = "";
@@ -36,7 +37,11 @@ string iconVariable = dom.GetObject("WetterIcon").Value().Substr(0, 2);
 if((system.Date("%H").ToInteger() >= 3)
 && (system.Date("%H").ToInteger() < 17))
 {
-    text = dom.GetObject("WetterTempMax").Value();
+
+    temp = dom.GetObject("WetterTempMax").Value();
+    temp = temp.Round(0);
+    text = temp.ToString();
+    text = text.Substr(0, text.Find(".") + 0) + dom.GetObject("Gradzeichen").Value() + "C";  ! Find() + 0 ==> Homematic Bug
 
     if(dom.GetObject("WetterTempDewPoint").Value() > 16)
     {
@@ -101,7 +106,11 @@ if((system.Date("%H").ToInteger() >= 3)
 }
 else
 {
-    text = dom.GetObject("WetterTempMin").Value();
+    temp = dom.GetObject("WetterTempMin").Value();
+    temp = temp.Round(0);
+    text = temp.ToString();
+    text = text.Substr(0, text.Find(".") + 0) + dom.GetObject("Gradzeichen").Value() + "C";  ! Find() + 0 ==> Homematic Bug
+
     icon = "11"; ! Mond
 
     !clear sky
