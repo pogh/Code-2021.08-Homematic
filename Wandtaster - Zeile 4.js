@@ -9,7 +9,7 @@ if(dom.GetObject("WetterAlert").Value() != "")
 
 if(dom.GetObject("AnzahlNiedrigeBatterien").Value() > 0)
 {
-    icon = "7";
+    icon = "9";
     text = "Batterie ";
     beep = ",{R=2,IN=5,ANS=7}";
 };
