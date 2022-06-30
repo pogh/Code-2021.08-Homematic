@@ -45,7 +45,7 @@ if((system.Date("%H").ToInteger() >= 3)
 
     if(dom.GetObject("WetterTempDewPoint").Value() > 16)
     {
-        text = "Warm! " + text;
+        text = "Frizz! " + text;
     }
 
     icon = "10"; ! Sonne
