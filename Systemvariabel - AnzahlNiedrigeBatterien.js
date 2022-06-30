@@ -16,6 +16,7 @@ if (!dp) {
 
  if ( dp.State() && dp.Value() ) {
      lowBatCount = lowBatCount + 1;
+     WriteLine(device.Name());
  }
 
 !WriteLine(device.Name());
