@@ -7,13 +7,13 @@ Many thanks to the active posters on https://homematic-forum.de otherwise none o
 ## Programs
 
 * **CCU3 LED**: Lights the annoyingly bright LED in the CCU3 when the system variable ```AnzahlNiedrigeBatterien``` is non-zero.
-* **Startup**: Updates ```Systemvariabel - Temperaturen Heute``` 10 minutes after startup (to allow time for the firewall to come on line).
+* **Startup**: Updates ```Systemvariabel - Wetter Heute``` 10 minutes after startup (to allow time for the firewall to come on line).
 
 ## Programs for the Button with E-Paper Status Display (HmIP-WRCD) 
 
 * **Wandtaster - Zeile 2:** Displays the content of the sytem variables ```WetterTempMin```, ```WetterTempMax```, ```WetterTempDewPoint``` and ```WetterIcon```.
 * **Wandtaster - Zeile 3:** Displays the content of the system variable ```IstTemperatur``` and a ‘Window Open’ icon if the system variable ```FensterOffen``` is true.
-* **Wandtaster - Zeile 3:** Display a ‘Warning‘ icon and beep if the system variable ```AnzahlNiedrigeBatterien``` is non-zero, otherwise display text if the system variable ```BalkontürOffen``` is true.  
+* **Wandtaster - Zeile 3:** Display a ‘Warning‘ icon if the system variable ```AnzahlNiedrigeBatterien``` is non-zero, otherwise display text if the system variable ```BalkontürOffen``` is true.  
 
 ## System Variables
 
