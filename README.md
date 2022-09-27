@@ -21,5 +21,6 @@ Many thanks to the active posters on https://homematic-forum.de otherwise none o
 * **BalkontürOffen**: Whether the balcony door is open
 * **FensterOffen**: Whether any window is open
 * **Gradzeichen**: A work around because the CCU3 frontend can’t save the degree symbol.  (Use this in string concatination)
+* **HeizungAn**: Whether any of the thermostats are active.
 * **IstTemperatur**: The average of all thermostats’ current temperature
 * **WetterTempMin**, **WetterTempMax**, **WetterTempDewPoint** and **WetterIcon** are populated from the OpenWeatherMap API
