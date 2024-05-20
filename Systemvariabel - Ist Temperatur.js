@@ -59,7 +59,7 @@ if(
 if(
     (temperatureLow != 0)
     &&
-    (temperatureLow < 16)
+    (temperatureLow < 14)
     && 
     (dom.GetObject("NiedrigtempWarnung").Value() != true)
 )
@@ -70,7 +70,7 @@ if(
 if(
     (temperatureLow != 0)
     &&
-    (temperatureLow >= 16)
+    (temperatureLow >= 14)
     && 
     (dom.GetObject("NiedrigtempWarnung").Value() != false)
 )
