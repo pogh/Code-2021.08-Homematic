@@ -2,11 +2,6 @@ string icon = "";
 string text = "";
 string beep = "";
 
-if(dom.GetObject("WetterAlert").Value() != "")
-{
-    text = dom.GetObject("WetterAlert").Value();
-};
-
 if(dom.GetObject("AnzahlNiedrigeBatterien").Value() > 0)
 {
     icon = "9";
