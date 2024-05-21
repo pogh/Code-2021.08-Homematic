@@ -173,7 +173,7 @@ if (stdout.Length() > 0) {
     
     !WriteLine(weather_code);
     
-    if(hour < 4 || hour > 5)
+    if((hour < 4) || (hour > 16))
     {
         is_night = true;
     }
