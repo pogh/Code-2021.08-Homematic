@@ -7,7 +7,9 @@ foreach (sDevId, root.Devices().EnumUsedIDs()) {
     boolean bDevReady = oDevice.ReadyConfig();
 
     if (bDevReady) {
-        if(oDevice.HssType() == "HmIP-eTRV-2") {
+        if((oDevice.HssType() == "HmIP-eTRV-2")
+        ||(oDevice.HssType() == "HmIP-eTRV-2 I9F")
+        ) {
             string sDevName = oDevice.Name();
             object oChn = oDevice.Channels().GetAt(1);
             object dp  = oChn.DPByHssDP("SET_POINT_TEMPERATURE");

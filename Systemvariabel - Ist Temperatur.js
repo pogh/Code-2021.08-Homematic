@@ -7,8 +7,9 @@ real temperatureLow = 99;
 
 foreach(deviceId, dom.GetObject(ID_DEVICES).EnumUsedIDs()) {
   var device = dom.GetObject(deviceId);
-  if(device.HssType() == "HmIP-eTRV-2")
-  {
+  if((device.HssType() == "HmIP-eTRV-2")
+  ||(device.HssType() == "HmIP-eTRV-2 I9F")
+  ) {
         var channel = device.Channels().GetAt(1);
         var dp  = channel.DPByHssDP("ACTUAL_TEMPERATURE");
         
