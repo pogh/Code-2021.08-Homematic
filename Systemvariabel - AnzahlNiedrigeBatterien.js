@@ -41,4 +41,4 @@ if(dom.GetObject("AnzahlNiedrigeBatterien").Value() != lowBatCount)
 
 WriteLine("Count: " # count);
 WriteLine("Low Battery Count: " # lowBatCount);
-WriteLine("Low Battery Devices: " # lowBatNames);
+WriteLine("Low Battery Names: " # lowBatNames);
