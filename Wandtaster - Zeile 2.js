@@ -13,13 +13,20 @@ else
 {
     temp = dom.GetObject("WetterTempMin").Value();
 }
+
 temp = temp.Round(0);
 
 text = temp.ToString();
+text = text.Substr(0, text.Find(".") + 0);
+
+if(text == "-0")
+{
+    text = "0";
+}
+
+text = text + dom.GetObject("Gradzeichen").Value() + "C";  ! Find() + 0 ==> Homematic Bug
 
 ! - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - !
-
-text = text.Substr(0, text.Find(".") + 0) + dom.GetObject("Gradzeichen").Value() + "C";  ! Find() + 0 ==> Homematic Bug
 
 text = text.Replace("ä", "{");
 text = text.Replace("ö", "|");
