@@ -5,4 +5,4 @@ Here are the programs I have on my Homematic IP CCU3.  A great home automation s
 ## Resources
 
 * https://homematic-forum.de : Thanks to the many active posters
-* https://github.com/homematic-community/hm-print/ : Thanks to developers
+* https://github.com/homematic-community/hm-print/ : Thanks to the developers
