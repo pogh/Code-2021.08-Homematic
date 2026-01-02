@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="./druckansicht.css">
+</head>
+
+<body><br>
+  <div id="printDiv">
+    <table id="ProgramTable" class="filterTable tTable j_translate" style="display: table;" cellspacing="0"
+      cellpadding="0" border="0">
+      <thead>
+        <tr>
+          <td class="thCell CLASS04802">Name</td>
+          <td class="thCell CLASS04802">Description</td>
+          <td class="thCell CLASS04802">Condition (if...)</td>
+          <td class="thCell CLASS04802">Activity (then..., or else...)</td>
+          <td class="thCell CLASS04802">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="CLASS04803">
+          <td class="tBodyCell bgWhite taCenter" id="prg5943name">Shutdown</td>
+          <td class="tBodyCell bgWhite taCenter" id="prg5943desc">
+          </td>
+          <td class="tBodyCell">System status: IsShutdown, when Is Shutting Down, trigger when updated</td>
+          <td class="tBodyCell">System status: Log Message immediately to !! SHUTDOWN set</td>
+          <td class="tBodyCell bgWhite"><input type="checkbox" onchange="isePrograms.SetVisibility(5943,this.checked);"
+              id="p5943_systeminternal"><label for="p5943_systeminternal">intrinsic</label></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div id="prgrulecontent">
+              <div id="rule5944" class="conditionEven">
+                <div class="Rule j_translate" style="display: block;">
+                  <div class="CLASS02300">Condition: If...</div>
+                  <div class="Condition">
+                    <div><span id="sico5952"><b><u>System state</u><b></b></b> <b class="CLASS02201">IsShutdown</b> <i>when</i> <b><u>Is Shutting
+                            Down</u><b></b></b>&nbsp;<b><u>trigger when updated</u><b></b></b>
+                      </span> </div><span></span><span></span>
+                  </div>
+                  <div><span><b><u>OR</u><b></b></b></span></div>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity: Then...<label><input type="checkbox" checked="checked" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div>
+                  <div><span id="side5953"><b><u>System state</u><b></b></b> <b class="CLASS02400">Log Message</b> <b><u>immediately</u><b></b></b>
+                      <b><u>!! SHUTDOWN</u></b>
+                    </span> </div>
+                  <div><span id="side5954"><b><u>Script</u><b></b></b> <br>
+                      <pre>! Reset System Variables<br><br>dom.GetObject("IsShutdown").State(false);<br>dom.GetObject("IsShutdownBlocked").State(true);<br>system.Save();<br><br>dom.GetObject("Log Message").State("Reset System Variables");</pre>
+                      <br> <b><u>immediately</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5955"><b><u>Script</u><b></b></b> <br>
+                      <pre>! Set all themostats to auto<br><br>if (dom.GetObject("IsHeatingOn").Value() = true)<br>{<br>    string sDevId;<br><br>    foreach(sDevId, root.Devices().EnumUsedIDs()) {<br>    object oDevice = dom.GetObject(sDevId);<br>    <br>    boolean bDevReady = oDevice.ReadyConfig();<br><br>        if (bDevReady) {<br>            if ((oDevice.HssType() == "HmIP-eTRV-2")<br>            || (oDevice.HssType() == "HmIP-eTRV-2 I9F")) <br>            {<br>                string sDevName = oDevice.Name();<br>                object oChn = oDevice.Channels().GetAt(1);<br>                object dp = oChn.DPByHssDP("CONTROL_MODE");<br><br>                ! 0 = AUTO - MODE(Standard)<br>                ! 1 = MANU - MODE<br>                ! 2 = PARTY - MODE<br>                ! 3 = BOOST - MODE<br>                dp.State(0);<br><br>                WriteLine(sDevName);<br>            }<br>        }<br>    }<br>}</pre>
+                      <br> <b><u>immediately</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5956"><b><u>Script</u><b></b></b> <br>
+                      <pre>! Set Status Display<br><br>dom.GetObject("StatusDisplayBeep").State("1");<br><br>dom.GetObject("StatusDisplayIcon1").State("");<br>dom.GetObject("StatusDisplayLine1").State("");<br><br>dom.GetObject("StatusDisplayIcon2").State("25");<br>dom.GetObject("StatusDisplayLine2").State("");<br><br>dom.GetObject("StatusDisplayIcon3").State("");<br>dom.GetObject("StatusDisplayLine3").State(system.Date(" %T").Substr(0,6));<br><br>dom.GetObject("IsStatusDisplayNeedsUpdate").State(true);<br></pre>
+                      <br> <b><u>immediately</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5957"><b><u>Script</u><b></b></b> <br>
+                      <pre>! Shutdown Modem Plug<br><br>dom.GetObject("HmIP-RF.00021D89A1B96A:3.ON_TIME").State(90);<br>dom.GetObject("HmIP-RF.00021D89A1B96A:3.STATE").State(true);<br><br>dom.GetObject("Log Message").State("Shutdown Modem Plug");</pre>
+                      <br> <b><u>immediately</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5958"><b><u>Script</u><b></b></b> <br>
+                      <pre>! Shutdown WiFi<br><br>system.Exec("ssh root@10.0.0.1 poweroff -d 30");<br><br>dom.GetObject("Log Message").State("Shutdown Wifi");</pre>
+                      <br> <b><u>delayed by</u><b></b></b> <b><u>15</u></b> <b><u>Seconds</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5959"><b><u>Script</u><b></b></b> <br>
+                      <pre>! Shutdown CCU3<br><br>system.Save();<br>system.Exec("poweroff -d 15");<br><br>dom.GetObject("Log Message").State("Shutdown CCU3");</pre>
+                      <br> <b><u>delayed by</u><b></b></b> <b><u>15</u></b> <b><u>Seconds</u><b></b></b>
+                    </span> </div><span></span>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity:<b><u>Else...</u><b></b></b><label><input type="checkbox" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div><span></span>
+                </div>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div><br>
+</body>
+
+</html>

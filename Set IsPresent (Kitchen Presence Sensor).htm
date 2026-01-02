@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="./druckansicht.css">
+</head>
+
+<body><br>
+  <div id="printDiv">
+    <table id="ProgramTable" class="filterTable tTable j_translate" style="display: table;" cellspacing="0"
+      cellpadding="0" border="0">
+      <thead>
+        <tr>
+          <td class="thCell CLASS04802">Name</td>
+          <td class="thCell CLASS04802">Description</td>
+          <td class="thCell CLASS04802">Condition (if...)</td>
+          <td class="thCell CLASS04802">Activity (then..., or else...)</td>
+          <td class="thCell CLASS04802">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="CLASS04803">
+          <td class="tBodyCell bgWhite taCenter" id="prg5943name">Set IsPresent
+            (Kitchen Presence Sensor)
+          </td>
+          <td class="tBodyCell bgWhite taCenter" id="prg5943desc">
+          </td>
+          <td class="tBodyCell">Channel status: Kitchen Presence Sensor:1 Presence detected trigger when changed</td>
+          <td class="tBodyCell">System status: Log Message immediately to Set IsPresent (Kitchen Presence Sensor) set
+          </td>
+          <td class="tBodyCell bgWhite"><input type="checkbox" onchange="isePrograms.SetVisibility(5943,this.checked);"
+              id="p5943_systeminternal"><label for="p5943_systeminternal">intrinsic</label></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div id="prgrulecontent">
+              <div id="rule5944" class="conditionEven">
+                <div class="Rule j_translate" style="display: block;">
+                  <div class="CLASS02300">Condition: If...</div>
+                  <div class="Condition">
+                    <div><span id="sico5952"><b><u>Device selection</u><b></b></b> <b class="CLASS02201">Kitchen Presence Sensor:1</b> <i>when</i> <b><u>Presence
+                            detected</u><b></b></b>&nbsp;<b><u>trigger when changed</u><b></b></b>
+                      </span> </div><span></span><span></span>
+                  </div>
+                  <div><span><b><u>OR</u><b></b></b></span></div>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity: Then...<label><input type="checkbox" checked="checked" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div>
+                  <div><span id="side5953"><b><u>System state</u><b></b></b> <b class="CLASS02400">Log Message</b> <b><u>immediately</u><b></b></b>
+                      <b><u>Set IsPresent (Kitchen Presence Sensor)</u></b>
+                    </span> </div>
+                  <div><span id="side5954"><b><u>System state</u><b></b></b> <b class="CLASS02400">IsPresent</b> <b><u>immediately</u><b></b></b>
+                      <b><u>Is Present</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5955"><b><u>System state</u><b></b></b> <b class="CLASS02400">IsPresent</b> <b><u>delayed by</u><b></b></b>
+                      <b><u>30</u></b> <b><u>Minutes</u><b></b></b> <b><u>Is Not Present</u><b></b></b>
+                    </span> </div><span></span>
+                </div>
+              </div>
+
+              <div id="rule5956" class="conditionOdd">
+                <div class="Rule">
+                  <div class="CLASS02300">Activity: <b><u>Else...</u><b></b></b><label><input type="checkbox"
+                        checked="checked" 
+                        class="SelectBox">Stop all current delays before performing the activity (e.g.
+                      retriggering).</label></div><span></span>
+                </div>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div><br>
+</body>
+
+</html>

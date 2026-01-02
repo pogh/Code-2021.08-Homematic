@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="./druckansicht.css">
+</head>
+
+<body><br>
+  <div id="printDiv">
+    <table id="ProgramTable" class="filterTable tTable j_translate" style="display: table;" cellspacing="0"
+      cellpadding="0" border="0">
+      <thead>
+        <tr>
+          <td class="thCell CLASS04802">Name</td>
+          <td class="thCell CLASS04802">Description</td>
+          <td class="thCell CLASS04802">Condition (if...)</td>
+          <td class="thCell CLASS04802">Activity (then..., or else...)</td>
+          <td class="thCell CLASS04802">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="CLASS04803">
+          <td class="tBodyCell bgWhite taCenter" id="prg5943name">Set Closet
+            Status Display</td>
+          <td class="tBodyCell bgWhite taCenter" id="prg5943desc">
+          </td>
+          <td class="tBodyCell">System status: IsStatusDisplayNeedsUpdate, when Status Display Needs Update, trigger
+            when updated</td>
+          <td class="tBodyCell">System status: Log Message immediately to Set Closet Status Display set</td>
+          <td class="tBodyCell bgWhite"><input type="checkbox" onchange="isePrograms.SetVisibility(5943,this.checked);"
+              id="p5943_systeminternal"><label for="p5943_systeminternal">intrinsic</label></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div id="prgrulecontent">
+              <div id="rule5944" class="conditionEven">
+                <div class="Rule j_translate" style="display: block;">
+                  <div class="CLASS02300">Condition: If...</div>
+                  <div class="Condition">
+                    <div><span id="sico5952"><b><u>System state</u><b></b></b> <b class="CLASS02201">IsStatusDisplayNeedsUpdate</b> <i>when</i> <b><u>Status
+                            Display Needs Update</u><b></b></b>&nbsp;<b><u>trigger when updated</u><b></b></b>
+                      </span> </div><span></span><span></span>
+                  </div>
+                  <div><span><b><u>OR</u><b></b></b></span></div>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity: Then...<label><input type="checkbox" checked="checked" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div>
+                  <div><span id="side5953"><b><u>System state</u><b></b></b> <b class="CLASS02400">Log Message</b> <b><u>immediately</u><b></b></b>
+                      <b><u>Set Closet Status Display</u></b>
+                    </span> </div>
+                  <div><span id="side5954"><b><u>System state</u><b></b></b> <b class="CLASS02400">IsStatusDisplayNeedsUpdate</b>
+                      <b><u>immediately</u><b></b></b> <b><u>Status Display Does Not Need Update</u><b></b></b>
+                    </span> </div>
+                  <div><span id="side5955"><b><u>Script</u><b></b></b> <br>
+                      <pre>string beep = dom.GetObject("StatusDisplayBeep").Value();<br>string beepRepeat = "0";<br><br>string icon1 = dom.GetObject("StatusDisplayIcon1").Value();<br>string line1 = dom.GetObject("StatusDisplayLine1").Value();<br><br>string icon2 = dom.GetObject("StatusDisplayIcon2").Value();<br>string line2 = dom.GetObject("StatusDisplayLine2").Value();<br><br>string icon3 = dom.GetObject("StatusDisplayIcon3").Value();<br>string line3 = dom.GetObject("StatusDisplayLine3").Value();<br><br>!beep = "7";<br>!line1 = "Müller 2";<br>!line2 = "ißt 2";<br>!line3 = "30° 2";<br>!icon1 = "4";<br>!icon2 = "5";<br>!icon3 = "6";<br><br>if (beep == "???" || beep == "") {<br>    beep = "-1";<br>}<br><br>string lineText;<br>string icon;<br>integer i = 0;<br><br>while (i &lt; 3) {<br>    i = i + 1;<br><br>    if (i == 1) {<br>        lineText = line1;<br>        icon = icon1;<br>    }<br><br>    if (i == 2) {<br>        lineText = line2;<br>        icon = icon2;<br>    }<br><br>    if (i == 3) {<br>        lineText = line3;<br>        icon = icon3;<br>    }<br><br>    if (lineText == "???") {<br>        lineText = "";<br>    }<br><br>    if (icon == "???") {<br>        icon = "0";<br>    }<br><br>    lineText = lineText.Replace("ä", "{");<br>    lineText = lineText.Replace("ö", "|");<br>    lineText = lineText.Replace("ü", "}");<br>    lineText = lineText.Replace("Ä", "[");<br>    lineText = lineText.Replace("Ö", "#");<br>    lineText = lineText.Replace("Ü", "$");<br>    lineText = lineText.Replace("ß", "_");<br>    lineText = lineText.Replace("°", dom.GetObject("Degree Symbol").Value());<br><br>    if (i == 1) {<br>        line1 = lineText;<br>        icon1 = icon;<br>    }<br><br>    if (i == 2) {<br>        line2 = lineText;<br>        icon2 = icon;<br>    }<br><br>    if (i == 3) {<br>        line3 = lineText;<br>        icon3 = icon;<br>    }<br><br>}<br><br>if((line1 == "") &amp;&amp; ((icon1 == "0") || (icon1 == "")))<br>{<br>    icon1 = dom.GetObject("WeatherIcon").Value();<br><br>    if(dom.GetObject("WeatherTempRising").Value() == true)<br>    {<br>        line1 = dom.GetObject("WeatherTempMax").Value() # " ";<br>    }<br>    else<br>    {<br>        line1 = dom.GetObject("WeatherTempMin").Value() # " ";<br>    }<br>}<br><br>if(dom.GetObject("IsWindowOpen").Value() == true)<br>{<br>    icon2 = 24;<br>}<br><br>if(dom.GetObject("IsBalconyDoorOpen").Value() == true)<br>{<br>    line2 = "Balcony ";<br>}<br><br>if((line2 == "") &amp;&amp; ((icon2 == "0") || (icon2 == "")))<br>{<br>    line2 = dom.GetObject("TemperaturCurrentDisplay").Value();<br>}<br><br>if((line3 == "") &amp;&amp; ((icon3 == "0") || (icon3 == "")))<br>{<br>    if(dom.GetObject("LowBatteryCount").Value() &gt; 0)<br>    {<br>        icon3 = "9";<br>        line3 = "Batteries ";<br>    }<br>}<br><br>if(beep == "7")<br>{<br>    beepRepeat = "1";<br>}<br><br>string command = "";<br><br>command = command # "{DDBC=WHITE,DDTC=BLACK,DDI=" # icon1 # ",DDA=CENTER,DDS=" # line1 # ",DDID=2},";<br>command = command # "{DDBC=WHITE,DDTC=BLACK,DDI=" # icon2 # ",DDA=CENTER,DDS=" # line2 # ",DDID=3},";<br>command = command # "{DDBC=WHITE,DDTC=BLACK,DDI=" # icon3 # ",DDA=CENTER,DDS=" # line3 # ",DDID=4,DDC=true},";<br>command = command # "{R=" # beepRepeat # ",IN=5,ANS=" # beep # "}";<br><br>dom.GetObject("HmIP-RF.002A5D8989D5D9:3.COMBINED_PARAMETER").State(command);<br><br>dom.GetObject("StatusDisplayBeep").State("");</pre>
+                      <br> <b><u>immediately</u><b></b></b>
+                    </span> </div><span></span>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity:<b><u>Else...</u><b></b></b><label><input type="checkbox" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div><span></span>
+                </div>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div><br>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="./druckansicht.css">
+</head>
+
+<body><br>
+  <div id="printDiv">
+    <table id="ProgramTable" class="filterTable tTable j_translate" style="display: table;" cellspacing="0"
+      cellpadding="0" border="0">
+      <thead>
+        <tr>
+          <td class="thCell CLASS04802">Name</td>
+          <td class="thCell CLASS04802">Description</td>
+          <td class="thCell CLASS04802">Condition (if...)</td>
+          <td class="thCell CLASS04802">Activity (then..., or else...)</td>
+          <td class="thCell CLASS04802">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="CLASS04803">
+          <td class="tBodyCell bgWhite taCenter" id="prg5943name">Set
+            LowBatteryCount</td>
+          <td class="tBodyCell bgWhite taCenter" id="prg5943desc">
+          </td>
+          <td class="tBodyCell">Time: Recurring All-day starting at 27.12.2025 trigger at point of time</td>
+          <td class="tBodyCell">System status: Log Message immediately to Set LowBatteryCount set</td>
+          <td class="tBodyCell bgWhite"><input type="checkbox" onchange="isePrograms.SetVisibility(5943,this.checked);"
+              id="p5943_systeminternal"><label for="p5943_systeminternal">intrinsic</label></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div id="prgrulecontent">
+              <div id="rule5944" class="conditionEven">
+                <div class="Rule j_translate" style="display: block;">
+                  <div class="CLASS02300">Condition: If...</div>
+                  <div class="Condition">
+                    <div><span id="sico5952"><b><u>Time control</u><b></b></b> <br>
+                        <pre>    <b><u>Zeit:</u></b> Zeitbereich ganztägig<br>    <b><u>Serienmuster:</u></b> Zeitintervall, alle 1 Stunden<br>    <b><u>Gültigkeitsdauer:</u></b> Beginn: 27.12.2025, kein Enddatum</pre>
+                        <br> &nbsp;<b><u>trigger at point of time</u><b></b></b>
+                      </span> </div><span></span><span></span>
+                  </div>
+                  <div><span><b><u>OR</u><b></b></b></span></div>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity: Then...<label><input type="checkbox" checked="checked" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div>
+                  <div><span id="side5954"><b><u>System state</u><b></b></b> <b class="CLASS02400">Log Message</b> <b><u>immediately</u><b></b></b>
+                      <b><u>Set LowBatteryCount</u></b>
+                    </span> </div>
+                  <div><span id="side5955"><b><u>Script</u><b></b></b> <br>
+                      <pre>integer count = 0;<br>integer lowBatCount = 0;<br>string lowBatNames = "";<br><br>string id;<br>foreach(id, dom.GetObject(ID_DEVICES).EnumUsedIDs())<br>{<br>    count = count + 1;<br><br>    var device = dom.GetObject(id);<br>    var ch = device.Channels().GetAt(0);<br><br>    var dp = ch.DPByHssDP("LOWBAT");<br>    if (!dp) {<br>        var dp = ch.DPByHssDP("LOW_BAT");<br>    }<br><br>    if ( dp.State() &amp;&amp; dp.Value() ) {<br>        lowBatCount = lowBatCount + 1;<br><br>        if(lowBatNames.Length() &gt; 0)<br>        {<br>            lowBatNames = lowBatNames # ", ";<br>        }<br>        lowBatNames = lowBatNames # device.Name();<br><br>        WriteLine(device.Name());<br>    }<br><br>    !WriteLine(device.Name());<br>}<br><br>if(dom.GetObject("LowBatteryCount").Value() != lowBatCount)<br>{<br>    dom.GetObject("LowBatteryCount").State(lowBatCount);<br>    WriteLine("New LowBatteryCount: " # lowBatCount);<br><br>    dom.GetObject("LowBatteryDeviceName").State(lowBatNames);<br>    WriteLine("New LowBatteryDeviceName: " # lowBatNames);<br>}<br><br>WriteLine("Count: " # count);<br>WriteLine("Low Battery Count: " # lowBatCount);<br>WriteLine("Low Battery Names: " # lowBatNames);</pre>
+                      <br> <b><u>immediately</u><b></b></b>
+                    </span> </div><span></span>
+                </div>
+                <div class="Rule">
+                  <div class="CLASS02300">Activity:<b><u>Else...</u><b></b></b><label><input type="checkbox" class="SelectBox">Stop all
+                      current delays before performing the activity (e.g. retriggering).</label></div><span></span>
+                </div>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div><br>
+</body>
+
+</html>
